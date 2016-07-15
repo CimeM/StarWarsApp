@@ -19,7 +19,6 @@ import Foundation
 struct localDataLibrary {
     
     var onePlanet = Planet()
-    
     var planets = [Planet()]
     var residents = [Resident()]    
     var planetsResourceURL = "https://private-anon-648f3e5aab-starwars2.apiary-mock.com/planets/10"
@@ -72,11 +71,11 @@ struct localDataLibrary {
             
             let nm = NetworkingManager()
             
-            
-            
+            // for loop going trough all the residents
             for index in 0...planet.residents.count-1 {
-            
-                var residentUrl = planet.residents[index]
+                
+                let residentUrl = planet.residents[index]
+                // replacing http with https - shortcut - to be avoided
                 let url = residentUrl.stringByReplacingOccurrencesOfString("http", withString: "https")
                 nm.getdatafromURL(url, completion: { (success, json) -> () in
                     
@@ -90,16 +89,8 @@ struct localDataLibrary {
                         completion(success: true, residents : self.residents)
                     }
                 })
-
             }
-            
-            
-           
-            
-            
         }
-        
-        
     }
     
     mutating func addToResidents(resident: Resident) {
@@ -108,52 +99,5 @@ struct localDataLibrary {
         
     }
     
-    
-    
-    
-    
-    
-    private func loadSampleData() -> [Planet] {
-        
-        var planet = Planet()
-        
-        
-        planet.likes = 23
-        
-        planet.residents = ["Obi One", "Kanobi", "Vader"]
-        
-        
-        planet.details = ["name":"sampleName", "terrain":"sampleTerain"]
-        
-        return [planet]
-        
-    }
-    
-    
-    
-    
-    /**
-     
-     sample resident data
-     
-     */
-    private func loadResidentSampleData() -> [Resident] {
-        
-        var residents = [Resident]()
-        
-        var resident  = Resident()
-        var resident1  = Resident()
-        
-        resident1.name = "Boba AliFett"
-        resident1.height = "42"
-        
-        resident.name = "Boba Fett"
-        resident.height = "32"
-        
-        residents = [resident, resident1]
-        
-        return residents
-        
-    }
     
 }

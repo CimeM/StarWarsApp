@@ -27,11 +27,20 @@ class ImageVC: UIViewController {
         exitButton.addTarget(self, action: #selector(back), forControlEvents: .TouchUpInside)
         
         self.fulscreenImageView = UIImageView()
-        self.fulscreenImageView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.width)
+        
+        // image is centered
+        self.fulscreenImageView?.frame = CGRect(x: 0,
+                                                y: self.view.frame.height/2 - self.view.frame.width ,
+                                                width: self.view.frame.width,
+                                                height: self.view.frame.width)
+        
         self.view.addSubview(self.fulscreenImageView!)
         self.view.addSubview(exitButton)
+        
+        // perform image request
         self.informationManager.getImageFrom(self.imageURL, completion:{(success, image) in
             
+            // load the image when finished
             self.fulscreenImageView!.image = image
             
         })

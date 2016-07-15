@@ -22,4 +22,16 @@ struct Planet {
     var values = ["name","terrain","climate","population", "gravity", "surface_water", "diameter", "edited", "orbital_period", "created", "rotation_period", "image_url", "likes", "residents"]
     
     var details = [String: String]()
+    
+    
+    mutating func selfDummyPopulation() {
+        for value in values {
+            
+            self.details[value] = "No data"
+            
+        }
+        
+    }
+    
+    
 }

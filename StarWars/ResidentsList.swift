@@ -37,6 +37,7 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
         
         //activity indication
         let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        activityIndicatorView.center = view.center
         residentsTableView.backgroundView = activityIndicatorView
         residentsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.activityIndicatorView = activityIndicatorView
@@ -69,13 +70,8 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
         
         let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell") as UITableViewCell
         
-        
-        
-        //let resident = self.residents[indexPath.row]
-        
         cell.textLabel?.text = "name"
         cell.detailTextLabel?.text = self.residents[indexPath.row].details["name"]
-        
         
         return cell
     }
@@ -88,11 +84,6 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
-    }
-    
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        
             self.selectedResident = self.residents[indexPath.row]
             print("selected resdent: \(self.residents[indexPath.row].details["name"])")
             toResidentDetail()
@@ -102,7 +93,6 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
     func toResidentDetail() {
         performSegueWithIdentifier("showRezidentDetail", sender: self)
     }
-
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "showRezidentDetail") {

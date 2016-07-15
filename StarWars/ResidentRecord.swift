@@ -17,4 +17,13 @@ struct Resident {
     
     var details = [String: String]()
     
+    
+    mutating func selfDummyPopulation() {
+        for value in values {
+            
+            self.details[value] = "No data"
+            
+        }
+        
+    }
 }

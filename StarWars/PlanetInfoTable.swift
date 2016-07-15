@@ -135,15 +135,12 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
-    }
-    
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         if showResidentsButtonRow == indexPath.row {
             
             toRezidentList()
         }
     }
+    
     
     func toRezidentList() {
         

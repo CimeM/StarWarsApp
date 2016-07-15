@@ -20,6 +20,11 @@ import AlamofireImage
 class NetworkingManager {
     
     
+    /**
+     
+     retrieves data from internet in JSON form, uses completion handler to pass the data
+     
+     */
     
     func getdatafromURL(url: String, completion: (result: Bool, json: JSON?) -> ()) {
         
@@ -29,7 +34,6 @@ class NetworkingManager {
                 if let value = response.result.value {
                     let jsonResponse = JSON(value)
                     //print("JSON: \(json)")
-                    
                     
                     completion(result: true, json: jsonResponse)
                     
@@ -41,9 +45,11 @@ class NetworkingManager {
         }
     }
     
-    
-    
-    
+    /**
+     
+     parser for Planet JSON data retrieved from internet
+     
+     */
     
     func parsePlanetData(data: JSON) -> Planet {
         
@@ -72,12 +78,13 @@ class NetworkingManager {
         }
         return planet
     }
+        
     
-    
-    
-    
-    
-    
+    /**
+     
+     parser for Resident JSON data retrieved from internet
+     
+     */
     func parseResidentData(data: JSON) -> Resident {
         
         var resident = Resident()
@@ -94,30 +101,26 @@ class NetworkingManager {
         return resident
     }
     
+    /**
+     
+     downloads the data form internet - used for downloading images.
+     TODO - data unavailable
+     
+     */
     
-    
-    func downloadImageFrom(url:String, completion: (result: Bool, image: NSData) -> ()) {
+    func downloadImageFrom(url:String, completion: (result: Bool, image: NSData?) -> ()) {
         
-        Alamofire.request(.GET, url)
-            .responseImage { response in
-                debugPrint(response)
-                
-                print(response.request)
-                print(response.response)
-                debugPrint(response.result)
-                
-                if let image = response.result.value {
-                    print("image downloaded: \(image)")
-                }
-        }
-            .response { (request, response, data, error) in
+        Alamofire.request(.GET, url).response() {
         
+            (_,response, data, _) in
+            
+            switch response!.statusCode {
+            case 200:
                 completion(result: true, image: data!)
-        
-        
+            default:
+                completion(result: false, image: nil)
+            }
         }
-        
-        
     }
     
     
