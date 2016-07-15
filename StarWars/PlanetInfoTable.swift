@@ -86,4 +86,14 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
             performSegueWithIdentifier("planetRezidenceList", sender: self)
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "planetRezidenceList") {
+            
+            let destinationVC = segue.destinationViewController as! ResidentsList
+            
+            destinationVC.selectedPlanet = self.planetLibrary.planets[0]
+            
+        }
+    }
 }

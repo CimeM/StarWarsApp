@@ -39,10 +39,10 @@
             </objects>
             <point key="canvasLocation" x="1143.5" y="355.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Residents List-->
         <scene sceneID="ouQ-Os-c3C">
             <objects>
-                <viewController id="KRy-z8-lYS" sceneMemberID="viewController">
+                <viewController id="KRy-z8-lYS" customClass="ResidentsList" customModule="StarWars" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zwF-CT-ZHg"/>
                         <viewControllerLayoutGuide type="bottom" id="GxQ-f3-iLV"/>
@@ -50,9 +50,16 @@
                     <view key="view" contentMode="scaleToFill" id="6qx-Tq-B6y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="usw-Hr-mRE">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="tableView" destination="usw-Hr-mRE" id="zYo-gw-f8t"/>
                         <segue destination="VDZ-c7-ESN" kind="show" identifier="showRezidentDetail" id="68g-gM-sie"/>
                     </connections>
                 </viewController>
