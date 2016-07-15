@@ -37,7 +37,9 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
         
         //activity indication
         let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        activityIndicatorView.center = view.center
+        //activityIndicatorView.frame = view.frame.center
+        print(activityIndicatorView.frame)
+        
         residentsTableView.backgroundView = activityIndicatorView
         residentsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.activityIndicatorView = activityIndicatorView

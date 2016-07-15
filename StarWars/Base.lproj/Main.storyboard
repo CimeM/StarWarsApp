@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Planet Info Table-->
@@ -90,7 +91,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="usw-Hr-mRE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="usw-Hr-mRE">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -100,6 +101,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GxQ-f3-iLV" firstAttribute="top" secondItem="usw-Hr-mRE" secondAttribute="bottom" id="BXj-rs-eWm"/>
+                            <constraint firstItem="usw-Hr-mRE" firstAttribute="top" secondItem="6qx-Tq-B6y" secondAttribute="topMargin" id="Ej8-dh-5sT"/>
+                            <constraint firstItem="usw-Hr-mRE" firstAttribute="leading" secondItem="6qx-Tq-B6y" secondAttribute="leadingMargin" constant="-20" id="U14-fX-Ul7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="usw-Hr-mRE" secondAttribute="trailing" constant="-20" id="cHt-ik-sZS"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="residentsTableView" destination="usw-Hr-mRE" id="Y2b-1C-Iwk"/>
