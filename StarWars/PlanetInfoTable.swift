@@ -21,9 +21,15 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
     
     @IBOutlet var imageView: UIImageView!
     
-    var planetLibrary = PlanetaryLibrary()
+    var planetLibrary = localDataLibrary()
+    
+    //var planet = Planet()
+    
+    var planets = [Planet()]
     
     var showResidentsButtonRow = 1
+    
+    var informationManager = InformationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +38,15 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         tableView.dataSource = self
         
         
-        planetLibrary.scanForPlanets()
+        
+        
+        informationManager.getPlanets( {(result, planet) in
+            self.planets = [planet]
+            self.tableView.reloadData()
+            
+            print(planet.likes)
+        })
+        
         
     }
     
@@ -45,19 +59,32 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         
         let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell") as UITableViewCell
         
-        var planet = planetLibrary.planets[0]
-        var keys = Array(planet.details.keys)
+
+        
         
         if indexPath.row == showResidentsButtonRow {
             
-                cell.textLabel?.text = "Show residents"
-                cell.detailTextLabel?.text = "Number of Residents: N/A"
+                cell.textLabel?.text = "Show residents >"
+                cell.detailTextLabel?.text = "Known residents: \(self.planets[0].residents.count)"
+            
+        }
+        else if (self.planets[0].values[indexPath.row] == "likes") {
+            cell.textLabel?.text = (self.planets[0].values[indexPath.row])
+            
+            cell.detailTextLabel?.text = "\(self.planets[0].likes)"
+            
+        }
+        else if (self.planets[0].values[indexPath.row] == "residents") {
+            cell.textLabel?.text = (self.planets[0].values[indexPath.row])
+            
+            cell.detailTextLabel?.text = "\(self.planets[0].residents.count)"
             
         }
         else {
-                cell.textLabel?.text = keys[indexPath.row]
             
-                cell.detailTextLabel?.text = planet.details[keys[indexPath.row]]
+                cell.textLabel?.text = (self.planets[0].values[indexPath.row])
+            
+                cell.detailTextLabel?.text = self.planets[0].details[self.planets[0].values[indexPath.row]]
         }
         
         
@@ -67,11 +94,14 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.planetLibrary.planets = planetLibrary.scanForPlanets()
-        let planet = planetLibrary.planets[0]
-        let count = (planet.details.count)
         
-        print (count)
+        //self.planetLibrary.planets = planetLibrary.scanForPlanets()
+        //let planet = self.planets.count
+        
+        let planet = Planet()
+        let count = (planet.values.count)
+        
+        
         return count
     }
     
@@ -83,8 +113,14 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         if showResidentsButtonRow == indexPath.row {
             
-            performSegueWithIdentifier("planetRezidenceList", sender: self)
+            toRezidentList()
         }
+    }
+    
+    func toRezidentList() {
+        
+        performSegueWithIdentifier("planetRezidenceList", sender: self)
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -11,18 +11,23 @@ import UIKit
 class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSource {
 
     
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var residentsTableView: UITableView!
     
     var selectedPlanet: Planet?
+    
+    var infromationManager = InformationManager()
+    
+    var residents = [Resident]()
+    
+    var selectedResident = Resident()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
-        tableView.dataSource = self
+        residentsTableView.delegate = self
+        residentsTableView.dataSource = self
         
-        
-        
+        self.residents = infromationManager.getResidentsFrom(self.selectedPlanet!)
         
     }
     
@@ -35,16 +40,20 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
         
         let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell") as UITableViewCell
         
-        cell.textLabel?.text = self.selectedPlanet?.residents[indexPath.row]
-        cell.detailTextLabel?.text = "name"
+        
+        
+        let resident = self.residents[indexPath.row]
+        
+        cell.textLabel?.text = resident.name
+        
         
         return cell
     }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = self.selectedPlanet != nil ? self.selectedPlanet?.residents.count : 0
-        return count!
+        let count = self.residents.count
+        return count
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -53,7 +62,23 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        print(indexPath.row)
+        
+            self.selectedResident = self.residents[indexPath.row]
+            toResidentDetail()
+
+    }
+    
+    func toResidentDetail() {
+        performSegueWithIdentifier("showRezidentDetail", sender: self)
+    }
+
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "showRezidentDetail") {
+            let destinationVC = segue.destinationViewController as! ResidentDetailVC
+            
+            destinationVC.resident = self.selectedResident
+        }
     }
     
 }

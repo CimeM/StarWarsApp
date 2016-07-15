@@ -16,22 +16,10 @@ import Foundation
  */
 
 struct Planet {
-    var name            = ""
-    var terrain         = ""
-    var climate         = ""
-    var population      = ""
-    var gravity         = ""
-    var surface_water   = ""
-    var diameter        = ""
-    var edited          = ""
-    var orbital_period  = ""
-    var created         = ""
-    var rotation_period = ""
-    var image_url       = ""
     var likes           = 0
     var residents       = [String]()
     
-    
+    var values = ["name","terrain","climate","population", "gravity", "surface_water", "diameter", "edited", "orbital_period", "created", "rotation_period", "image_url", "likes", "residents"]
     
     var details = [String: String]()
 }
