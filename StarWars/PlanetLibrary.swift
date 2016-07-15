@@ -31,11 +31,31 @@ struct PlanetaryLibrary {
     // retrieves data from network and updates itself
     func scanForPlanets() -> [Planet] {
         
-        let planet = Planet()
+        //let planet = Planet()
         // TODO - update existing planets 
-        let networkingManager = NetworkingManager()
+        //let networkingManager = NetworkingManager()
         
+        return [loadSampleData()]
+    }
+    
+    func loadSampleData() -> Planet {
         
-        return [planet]
+        var planet = Planet()
+        
+        planet.climate = "sampleClimate"
+        planet.created = "sampleCreated"
+        planet.name = "sampleName"
+        planet.diameter = "sampleDiameter"
+        planet.gravity = "samplegravity"
+        planet.image_url = "http://vignette2.wikia.nocookie.net/planetstar/images/e/eb/Forest_world.jpg"
+        planet.likes = 23
+        planet.population = "34"
+        planet.residents = ["Obi One", "Kanobi", "Vader"]
+        planet.surface_water = "yes"
+        
+        planet.details = ["name":"sampleName", "terrain":"sampleTerain"]
+        
+        return planet
+        
     }
 }

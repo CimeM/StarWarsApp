@@ -30,4 +30,8 @@ struct Planet {
     var image_url       = ""
     var likes           = 0
     var residents       = [String]()
+    
+    
+    
+    var details = [String: String]()
 }

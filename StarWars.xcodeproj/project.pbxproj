@@ -17,6 +17,7 @@
 		5B92522B1D38100D006D0EA1 /* PlanetLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B92522A1D38100D006D0EA1 /* PlanetLibrary.swift */; };
 		5B92522D1D3814BA006D0EA1 /* informationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B92522C1D3814BA006D0EA1 /* informationManager.swift */; };
 		5B9252381D38B6A3006D0EA1 /* PlanetInfoTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9252371D38B6A3006D0EA1 /* PlanetInfoTable.swift */; };
+		5B9252601D38D97A006D0EA1 /* ResidentsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B92525F1D38D97A006D0EA1 /* ResidentsList.swift */; };
 		5E7892EFB9980F073EAC1E59 /* Pods_StarWars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8A0C8820A7054AA0E5EFF9 /* Pods_StarWars.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		5B92522A1D38100D006D0EA1 /* PlanetLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanetLibrary.swift; sourceTree = "<group>"; };
 		5B92522C1D3814BA006D0EA1 /* informationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = informationManager.swift; sourceTree = "<group>"; };
 		5B9252371D38B6A3006D0EA1 /* PlanetInfoTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanetInfoTable.swift; sourceTree = "<group>"; };
+		5B92525F1D38D97A006D0EA1 /* ResidentsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResidentsList.swift; sourceTree = "<group>"; };
 		6E8A0C8820A7054AA0E5EFF9 /* Pods_StarWars.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarWars.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 		5B9252231D37E039006D0EA1 /* V */ = {
 			isa = PBXGroup;
 			children = (
+				5B92525E1D38D959006D0EA1 /* ResidentsList */,
 				5B92522E1D3828BE006D0EA1 /* PlanetInfo */,
 				5B9252111D37E02B006D0EA1 /* Main.storyboard */,
 				5B9252191D37E02B006D0EA1 /* LaunchScreen.storyboard */,
@@ -132,6 +135,14 @@
 				5B9252371D38B6A3006D0EA1 /* PlanetInfoTable.swift */,
 			);
 			name = PlanetInfo;
+			sourceTree = "<group>";
+		};
+		5B92525E1D38D959006D0EA1 /* ResidentsList */ = {
+			isa = PBXGroup;
+			children = (
+				5B92525F1D38D97A006D0EA1 /* ResidentsList.swift */,
+			);
+			name = ResidentsList;
 			sourceTree = "<group>";
 		};
 		E6FB7D3E06117448DF1D2040 /* Pods */ = {
@@ -269,6 +280,7 @@
 				5B92522D1D3814BA006D0EA1 /* informationManager.swift in Sources */,
 				5B9252271D380EF7006D0EA1 /* NetworkingManager.swift in Sources */,
 				5B92520E1D37E02B006D0EA1 /* AppDelegate.swift in Sources */,
+				5B9252601D38D97A006D0EA1 /* ResidentsList.swift in Sources */,
 				5B92522B1D38100D006D0EA1 /* PlanetLibrary.swift in Sources */,
 				5B9252381D38B6A3006D0EA1 /* PlanetInfoTable.swift in Sources */,
 				5B9252161D37E02B006D0EA1 /* StarWars.xcdatamodeld in Sources */,
