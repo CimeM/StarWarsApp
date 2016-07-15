@@ -35,6 +35,8 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
     
     var informationManager = InformationManager()
     
+    var pandoraLike = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -142,8 +144,15 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         // likes button if clicked - increase likes
         if cell?.textLabel?.text == "Likes (click me)" {
             
-            cell?.detailTextLabel?.text = "\(self.planets[0].likes + 1)"
+            if !pandoraLike {
+                
+                self.planets[0].likes += 1
+                cell?.detailTextLabel?.text = "\(self.planets[0].likes)"
+                
+                // once you liked it, there is no way back!
+                self.pandoraLike = true
             
+            }
         }
         
         
