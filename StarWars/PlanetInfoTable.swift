@@ -97,7 +97,7 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
             
         }
         else if (self.planets[0].values[indexPath.row] == "likes") {
-            cell.textLabel?.text = (self.planets[0].values[indexPath.row])
+            cell.textLabel?.text = "Likes"
             
             cell.detailTextLabel?.text = "\(self.planets[0].likes)"
             
@@ -135,10 +135,19 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        
         if showResidentsButtonRow == indexPath.row {
             
             toRezidentList()
         }
+        if cell?.textLabel?.text == "Likes" {
+            
+            cell?.detailTextLabel?.text = "\(self.planets[0].likes + 1)"
+            
+        }
+        
+        
     }
     
     
