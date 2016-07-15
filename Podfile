@@ -7,6 +7,9 @@ target 'StarWars' do
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftyJSON', '~> 2.3'
   pod 'Eureka'
+  pod 'AlamofireImage', '~> 2.4'
+source 'https://github.com/CocoaPods/Specs.git'
+
   # Pods for StarWars
 
 end
