@@ -21,6 +21,10 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
     
     @IBOutlet var imageView: UIImageView!
     
+    @IBAction func unwindToPlanetInfoVC(sender: UIStoryboardSegue) {
+        
+    }
+    
     var planetLibrary = localDataLibrary()
     
     weak var activityIndicatorView: UIActivityIndicatorView!
@@ -43,6 +47,10 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.activityIndicatorView = activityIndicatorView
         
+        self.imageView.userInteractionEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(PlanetInfoTable.imageTapped(_:)))
+        self.imageView.addGestureRecognizer(tapGestureRecognizer)
+    
         
         informationManager.getPlanets( {(result, planet) in
             self.planets = [planet]
@@ -51,11 +59,23 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
             self.activityIndicatorView.stopAnimating()
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
             
+            let imageUrl =  planet.details["image_url"]!
             
+            self.informationManager.getImageFrom(imageUrl, completion:{(success, image) in
+                
+                self.imageView.image = image
+            
+            })
         })
         
-        
     }
+    
+    
+    func imageTapped(img: AnyObject)
+    {
+        toFullscreenImage()
+    }
+    
     
     override func viewWillAppear(animated: Bool) {
         activityIndicatorView.startAnimating()
@@ -130,6 +150,11 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         performSegueWithIdentifier("planetRezidenceList", sender: self)
         
     }
+    func toFullscreenImage() {
+        
+        performSegueWithIdentifier("shofImageFullscreen", sender: self)
+        
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "planetRezidenceList") {
@@ -139,5 +164,15 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
             destinationVC.selectedPlanet = self.planets[0]
             
         }
+        
+        if (segue.identifier == "shofImageFullscreen") {
+            
+            let destinationVC = segue.destinationViewController as! ImageVC
+            
+            destinationVC.imageURL = self.planets[0].details["image_url"]!
+                        
+        }
     }
+    
+
 }

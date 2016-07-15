@@ -20,6 +20,7 @@
 		5B9252601D38D97A006D0EA1 /* ResidentsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B92525F1D38D97A006D0EA1 /* ResidentsList.swift */; };
 		5B9252621D38DE6C006D0EA1 /* ResidentRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9252611D38DE6C006D0EA1 /* ResidentRecord.swift */; };
 		5B9252661D38E8BE006D0EA1 /* ResidentDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9252651D38E8BE006D0EA1 /* ResidentDetailVC.swift */; };
+		5B9252691D394614006D0EA1 /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9252681D394614006D0EA1 /* ImageVC.swift */; };
 		5E7892EFB9980F073EAC1E59 /* Pods_StarWars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8A0C8820A7054AA0E5EFF9 /* Pods_StarWars.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		5B92525F1D38D97A006D0EA1 /* ResidentsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResidentsList.swift; sourceTree = "<group>"; };
 		5B9252611D38DE6C006D0EA1 /* ResidentRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResidentRecord.swift; sourceTree = "<group>"; };
 		5B9252651D38E8BE006D0EA1 /* ResidentDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResidentDetailVC.swift; sourceTree = "<group>"; };
+		5B9252681D394614006D0EA1 /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
 		6E8A0C8820A7054AA0E5EFF9 /* Pods_StarWars.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarWars.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -105,6 +107,7 @@
 		5B9252231D37E039006D0EA1 /* V */ = {
 			isa = PBXGroup;
 			children = (
+				5B9252671D3945F6006D0EA1 /* ImageVC */,
 				5B9252631D38E882006D0EA1 /* ResidentDetailView */,
 				5B92525E1D38D959006D0EA1 /* ResidentsList */,
 				5B92522E1D3828BE006D0EA1 /* PlanetInfo */,
@@ -157,6 +160,14 @@
 				5B9252651D38E8BE006D0EA1 /* ResidentDetailVC.swift */,
 			);
 			name = ResidentDetailView;
+			sourceTree = "<group>";
+		};
+		5B9252671D3945F6006D0EA1 /* ImageVC */ = {
+			isa = PBXGroup;
+			children = (
+				5B9252681D394614006D0EA1 /* ImageVC.swift */,
+			);
+			name = ImageVC;
 			sourceTree = "<group>";
 		};
 		E6FB7D3E06117448DF1D2040 /* Pods */ = {
@@ -295,6 +306,7 @@
 				5B9252271D380EF7006D0EA1 /* NetworkingManager.swift in Sources */,
 				5B92520E1D37E02B006D0EA1 /* AppDelegate.swift in Sources */,
 				5B9252601D38D97A006D0EA1 /* ResidentsList.swift in Sources */,
+				5B9252691D394614006D0EA1 /* ImageVC.swift in Sources */,
 				5B9252661D38E8BE006D0EA1 /* ResidentDetailVC.swift in Sources */,
 				5B92522B1D38100D006D0EA1 /* LocalDataLibrary.swift in Sources */,
 				5B9252621D38DE6C006D0EA1 /* ResidentRecord.swift in Sources */,

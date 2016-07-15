@@ -10,7 +10,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-
+import AlamofireImage
 
 /**
  
@@ -95,6 +95,30 @@ class NetworkingManager {
     }
     
     
+    
+    func downloadImageFrom(url:String, completion: (result: Bool, image: NSData) -> ()) {
+        
+        Alamofire.request(.GET, url)
+            .responseImage { response in
+                debugPrint(response)
+                
+                print(response.request)
+                print(response.response)
+                debugPrint(response.result)
+                
+                if let image = response.result.value {
+                    print("image downloaded: \(image)")
+                }
+        }
+            .response { (request, response, data, error) in
+        
+                completion(result: true, image: data!)
+        
+        
+        }
+        
+        
+    }
     
     
     

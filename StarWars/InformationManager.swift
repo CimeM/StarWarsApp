@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 /**
  
@@ -35,6 +36,10 @@ class InformationManager {
         
     }
     
+    
+    
+    
+    
     func getResidentsFrom(planet :Planet, completion: (success: Bool, residents: [Resident])->() ) {
         
         localDataLib.scanForResidents(planet, completion: {(success, residents) in
@@ -53,4 +58,24 @@ class InformationManager {
         
         
     }
+    
+    
+    
+    
+    func getImageFrom(url:String, completion: (result: Bool, image: UIImage) -> ()) {
+        
+        var nm = NetworkingManager()
+        nm.downloadImageFrom(url, completion: {(result, image) in
+            
+            completion(result:result, image: UIImage(data: image)!)
+            })
+        
+        
+    }
+        
+        
+        
+        
+        
+        
 }
