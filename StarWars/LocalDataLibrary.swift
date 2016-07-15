@@ -21,8 +21,7 @@ struct localDataLibrary {
     var onePlanet = Planet()
     
     var planets = [Planet()]
-    var residents = [Resident]()
-    
+    var residents = [Resident()]    
     var planetsResourceURL = "https://private-anon-648f3e5aab-starwars2.apiary-mock.com/planets/10"
     // when initialized the library populates itself with planets
     init() {
@@ -68,35 +67,46 @@ struct localDataLibrary {
      */
     
     mutating func scanForResidents(planet: Planet, completion: (success: Bool, residents : [Resident]) ->()) {
-    
+        
         if self.residents[0].details.isEmpty  {
             
             let nm = NetworkingManager()
             
-            for residentUrl in planet.residents {
             
-                nm.getdatafromURL(residentUrl, completion: { (success, json) -> () in
+            
+            for index in 0...planet.residents.count-1 {
+            
+                var residentUrl = planet.residents[index]
+                let url = residentUrl.stringByReplacingOccurrencesOfString("http", withString: "https")
+                nm.getdatafromURL(url, completion: { (success, json) -> () in
                     
                     var resident = Resident()
-                    if success  {
-                        resident = nm.parseResidentData(json!)
-                        
-                    }
-                    else{
-                        
-                    }
-                    self.residents.append(resident)
+                    resident = nm.parseResidentData(json!)
+                
+                    self.addToResidents(resident)
                     
+                    
+                    if (self.residents.count == planet.residents.count) {
+                        completion(success: true, residents : self.residents)
+                    }
                 })
-                
-                completion(success: true, residents : self.residents)
-                
+
             }
             
+            
+           
+            
+            
         }
-        self.residents = loadResidentSampleData()
+        
+        
     }
     
+    mutating func addToResidents(resident: Resident) {
+        
+        self.residents.append(resident)
+        
+    }
     
     
     

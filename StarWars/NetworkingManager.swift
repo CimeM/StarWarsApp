@@ -90,6 +90,7 @@ class NetworkingManager {
                 
             }
         }
+        
         return resident
     }
     

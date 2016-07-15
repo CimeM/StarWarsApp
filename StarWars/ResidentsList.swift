@@ -12,8 +12,16 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
 
     
     @IBOutlet var residentsTableView: UITableView!
+    weak var activityIndicatorView: UIActivityIndicatorView!
     
-    var selectedPlanet: Planet?
+    
+    
+    var selectedPlanet: Planet? {
+        didSet {
+            //print(self.selectedPlanet)
+        }
+        
+    }
     
     var infromationManager = InformationManager()
     
@@ -27,12 +35,33 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
         residentsTableView.delegate = self
         residentsTableView.dataSource = self
         
-        self.residents = infromationManager.getResidentsFrom(self.selectedPlanet!)
+        //activity indication
+        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        residentsTableView.backgroundView = activityIndicatorView
+        residentsTableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.activityIndicatorView = activityIndicatorView
+        
+        
+
+        infromationManager.getResidentsFrom(self.selectedPlanet!, completion: {(success,residents) in
+            
+            
+                //print("list: \(residents)")
+                self.residents = residents
+                self.residentsTableView.reloadData()
+                self.activityIndicatorView.stopAnimating()
+                self.residentsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+            
+            })
         
     }
     
+    
+    
+    
     override func viewWillAppear(animated: Bool) {
-        
+    
+        activityIndicatorView.startAnimating()
     }
     
     
@@ -42,9 +71,10 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
         
         
         
-        let resident = self.residents[indexPath.row]
+        //let resident = self.residents[indexPath.row]
         
-        cell.textLabel?.text = resident.name
+        cell.textLabel?.text = "name"
+        cell.detailTextLabel?.text = self.residents[indexPath.row].details["name"]
         
         
         return cell
@@ -64,6 +94,7 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
             self.selectedResident = self.residents[indexPath.row]
+            print("selected resdent: \(self.residents[indexPath.row].details["name"])")
             toResidentDetail()
 
     }
@@ -80,5 +111,6 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
             destinationVC.resident = self.selectedResident
         }
     }
+    
     
 }

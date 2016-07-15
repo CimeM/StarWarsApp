@@ -24,9 +24,7 @@ class InformationManager {
     func getPlanets(completion:(result:Bool, planet: Planet)->())  {
         
         self.localDataLib.scanForPlanets({(success, planet) in
-        
-            
-            
+
             completion(result: true, planet: planet)
             
             //return localDataLib.planets
@@ -37,14 +35,22 @@ class InformationManager {
         
     }
     
-    func getResidentsFrom(planet :Planet) -> [Resident]{
+    func getResidentsFrom(planet :Planet, completion: (success: Bool, residents: [Resident])->() ) {
         
         localDataLib.scanForResidents(planet, completion: {(success, residents) in
             
+            if success {
+                //print("iManager: \(residents)")
+                completion(success: true, residents: residents)
+            }
+            else {
+            
+                completion(success: false, residents: [Resident()])
+            }
             
             
-            })
+        })
         
-        return localDataLib.residents
+        
     }
 }

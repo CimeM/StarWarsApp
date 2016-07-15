@@ -23,7 +23,7 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
     
     var planetLibrary = localDataLibrary()
     
-    //var planet = Planet()
+    weak var activityIndicatorView: UIActivityIndicatorView!
     
     var planets = [Planet()]
     
@@ -37,20 +37,28 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         tableView.delegate = self
         tableView.dataSource = self
         
-        
+        //activity indication
+        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        tableView.backgroundView = activityIndicatorView
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.activityIndicatorView = activityIndicatorView
         
         
         informationManager.getPlanets( {(result, planet) in
             self.planets = [planet]
             self.tableView.reloadData()
             
-            print(planet.likes)
+            self.activityIndicatorView.stopAnimating()
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+            
+            
         })
         
         
     }
     
     override func viewWillAppear(animated: Bool) {
+        activityIndicatorView.startAnimating()
         
     }
     
@@ -128,7 +136,7 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
             
             let destinationVC = segue.destinationViewController as! ResidentsList
             
-            destinationVC.selectedPlanet = self.planetLibrary.planets[0]
+            destinationVC.selectedPlanet = self.planets[0]
             
         }
     }
