@@ -87,17 +87,15 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         
         let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell") as UITableViewCell
         
-
-        
-        
+        // render table buttons differently
         if indexPath.row == showResidentsButtonRow {
             
-                cell.textLabel?.text = "Show residents >"
+                cell.textLabel?.text = "Show residents (click me)"
                 cell.detailTextLabel?.text = "Known residents: \(self.planets[0].residents.count)"
             
         }
         else if (self.planets[0].values[indexPath.row] == "likes") {
-            cell.textLabel?.text = "Likes"
+            cell.textLabel?.text = "Likes (click me)"
             
             cell.detailTextLabel?.text = "\(self.planets[0].likes)"
             
@@ -108,10 +106,9 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
             cell.detailTextLabel?.text = "\(self.planets[0].residents.count)"
             
         }
+            
         else {
-            
                 cell.textLabel?.text = (self.planets[0].values[indexPath.row])
-            
                 cell.detailTextLabel?.text = self.planets[0].details[self.planets[0].values[indexPath.row]]
         }
         
@@ -141,7 +138,9 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
             
             toRezidentList()
         }
-        if cell?.textLabel?.text == "Likes" {
+        
+        // likes button if clicked - increase likes
+        if cell?.textLabel?.text == "Likes (click me)" {
             
             cell?.detailTextLabel?.text = "\(self.planets[0].likes + 1)"
             
