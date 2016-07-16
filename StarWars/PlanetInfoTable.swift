@@ -127,13 +127,14 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         // render table buttons differently
         if indexPath.row == showResidentsButtonRow {
             
-                cell.textLabel?.text = "Show residents (click me)"
+                cell.textLabel?.text = "residents"
+                cell.accessoryView = UIImageView(image: UIImage(named: "open_arrow"))
                 cell.detailTextLabel?.text = "Known residents: \(self.planets[0].residents.count)"
             
         }
         else if (self.planets[0].values[indexPath.row] == "likes") {
-            cell.textLabel?.text = "Likes (click me)"
-            
+            cell.textLabel?.text = "likes"
+            cell.accessoryView = UIImageView(image: UIImage(named: "like_icon"))
             cell.detailTextLabel?.text = "\(self.planets[0].likes)"
             
         }
@@ -181,7 +182,7 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         }
         
         // likes button if clicked - increase likes
-        if cell?.textLabel?.text == "Likes (click me)" {
+        if cell?.textLabel?.text == "likes" {
             
             if !pandoraLike {
                 
@@ -234,6 +235,7 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         var blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.view.bounds
         blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        self.view.backgroundColor = UIColor.blackColor()
         
         self.view.addSubview(blurEffectView)
         self.view.sendSubviewToBack(blurEffectView)
