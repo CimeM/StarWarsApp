@@ -21,18 +21,17 @@ class ImageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor.blackColor()
         
+        // close button
         let exitButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         exitButton.setTitle("X", forState: .Normal)
         exitButton.addTarget(self, action: #selector(back), forControlEvents: .TouchUpInside)
         
+        
         self.fulscreenImageView = UIImageView()
         
-        // image is centered
-        self.fulscreenImageView?.frame = CGRect(x: 0,
-                                                y: self.view.frame.height/2 - self.view.frame.width ,
-                                                width: self.view.frame.width,
-                                                height: self.view.frame.width)
+        
         
         self.view.addSubview(self.fulscreenImageView!)
         self.view.addSubview(exitButton)
@@ -49,7 +48,11 @@ class ImageVC: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        
+        // centerin the image
+        self.fulscreenImageView?.frame = CGRect(x: 0,
+                                                y: (self.view.frame.height/2) - (self.view.frame.width/2) ,
+                                                width: self.view.frame.width,
+                                                height: self.view.frame.width)
     }
     
     func back(){

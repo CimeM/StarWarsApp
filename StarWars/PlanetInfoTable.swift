@@ -46,6 +46,9 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         tableView.delegate = self
         tableView.dataSource = self
         
+        // load aditional view styles
+        loadStyles()
+        
         
         // table data activity indicator
         let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
@@ -76,20 +79,33 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
             let imageUrl =  planet.details["image_url"]!
             self.activityIndicatorView.stopAnimating()
-
+            
+            
+            if result {
+                self.title = "Planet " + self.planets[0].details["name"]! + " info"
+            }
+            else {
+                self.title = "Data unavailable"
+            }
+            
+            
             
             // download thumbnail image
             self.informationManager.getImageFrom(imageUrl, completion:{(success, image) in
                 
                 self.imageView.image = image
+                self.view.backgroundColor = UIColor(patternImage: image)
                 self.imageActivityIndicatorView.stopAnimating()
+                
+                self.tableView.backgroundColor = UIColor(colorLiteralRed: 255, green: 255, blue: 255, alpha: 0)
+                
+                
             })
         })
         
     }
     
-    
-    
+        
     
     func imageTapped(img: AnyObject)
     {
@@ -107,6 +123,7 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         
         let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell") as UITableViewCell
         
+        cell.backgroundColor = UIColor(white: 1, alpha: 0.5)
         // render table buttons differently
         if indexPath.row == showResidentsButtonRow {
             
@@ -153,6 +170,10 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)
+        
+        
+        
+        
         
         if showResidentsButtonRow == indexPath.row {
             
@@ -204,6 +225,18 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
             destinationVC.imageURL = self.planets[0].details["image_url"]!
                         
         }
+    }
+    
+    func loadStyles() {
+        
+        //blur effect for views' background image
+        var blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+        var blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.bounds
+        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        
+        self.view.addSubview(blurEffectView)
+        self.view.sendSubviewToBack(blurEffectView)
     }
     
 
