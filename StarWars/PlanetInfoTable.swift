@@ -28,6 +28,7 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
     var planetLibrary = localDataLibrary()
     
     weak var activityIndicatorView: UIActivityIndicatorView!
+    weak var imageActivityIndicatorView: UIActivityIndicatorView!
     
     var planets = [Planet()]
     
@@ -37,40 +38,57 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
     
     var pandoraLike = false
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        //activity indication
+        
+        // table data activity indicator
         let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         tableView.backgroundView = activityIndicatorView
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.activityIndicatorView = activityIndicatorView
         
+        
+        // image data activity indicator
+        let imageActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        self.imageView.backgroundColor = UIColor.lightGrayColor()
+        imageActivityIndicatorView.frame.origin = imageView.frame.origin
+        self.imageActivityIndicatorView  = imageActivityIndicatorView
+        self.imageView.addSubview(imageActivityIndicatorView)
+        
+        
+        // enable tap gesture on image
         self.imageView.userInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(PlanetInfoTable.imageTapped(_:)))
         self.imageView.addGestureRecognizer(tapGestureRecognizer)
-    
         
+        
+
         informationManager.getPlanets( {(result, planet) in
             self.planets = [planet]
             self.tableView.reloadData()
             
-            self.activityIndicatorView.stopAnimating()
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-            
             let imageUrl =  planet.details["image_url"]!
+            self.activityIndicatorView.stopAnimating()
+
             
+            // download thumbnail image
             self.informationManager.getImageFrom(imageUrl, completion:{(success, image) in
                 
                 self.imageView.image = image
-            
+                self.imageActivityIndicatorView.stopAnimating()
             })
         })
         
     }
+    
+    
     
     
     func imageTapped(img: AnyObject)
@@ -80,8 +98,8 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
     
     
     override func viewWillAppear(animated: Bool) {
-        activityIndicatorView.startAnimating()
-        
+        self.activityIndicatorView.startAnimating()
+        self.imageActivityIndicatorView.startAnimating()
     }
     
     
