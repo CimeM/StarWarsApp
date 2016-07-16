@@ -14,14 +14,7 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
     @IBOutlet var residentsTableView: UITableView!
     weak var activityIndicatorView: UIActivityIndicatorView!
     
-    
-    
-    var selectedPlanet: Planet? {
-        didSet {
-            //print(self.selectedPlanet)
-        }
-        
-    }
+    var selectedPlanet: Planet?
     
     var infromationManager = InformationManager()
     
@@ -35,6 +28,10 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
         residentsTableView.delegate = self
         residentsTableView.dataSource = self
         
+        
+        self.title = "Resident List(\(self.selectedPlanet!.residents.count))"
+        
+        
         //activity indication
         let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         
@@ -46,9 +43,9 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
 
         infromationManager.getResidentsFrom(self.selectedPlanet!, completion: {(success,residents) in
             
-            
-                //print("list: \(residents)")
+
                 self.residents = residents
+                self.residents.removeFirst()
                 self.residentsTableView.reloadData()
                 self.activityIndicatorView.stopAnimating()
                 self.residentsTableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
@@ -70,8 +67,9 @@ class ResidentsList: UIViewController , UITableViewDelegate, UITableViewDataSour
         
         let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell") as UITableViewCell
         
-        cell.textLabel?.text = "name"
-        cell.detailTextLabel?.text = self.residents[indexPath.row].details["name"]
+        cell.textLabel?.text = self.residents[indexPath.row].details["name"]
+        cell.detailTextLabel!.text = "Resident gender: " + self.residents[indexPath.row].details["gender"]!
+        cell.accessoryView = UIImageView(image: UIImage(named: "open_arrow"))
         
         return cell
     }

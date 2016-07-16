@@ -25,19 +25,38 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         
     }
     
-    var planetLibrary = localDataLibrary()
-    
     weak var activityIndicatorView: UIActivityIndicatorView!
     weak var imageActivityIndicatorView: UIActivityIndicatorView!
     
+    /**
+     
+     local data array of planets - can be updated with InformationManager
+     
+     */
     var planets = [Planet()]
-    
-    var showResidentsButtonRow = 1
     
     var informationManager = InformationManager()
     
+    /**
+     
+     residents list button position (in table view)
+     
+     */
+    var showResidentsButtonRow = 1
+    
+    /**
+     
+     user can like the planet only once
+     
+     */
     var pandoraLike = false
     
+    /**
+     
+     is loading - true, finished loading - false
+     
+     */
+    var loadingFlag = true
     
     
     override func viewDidLoad() {
@@ -71,8 +90,20 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         self.imageView.addGestureRecognizer(tapGestureRecognizer)
         
         
-
-        informationManager.getPlanets( {(result, planet) in
+        // perform planetary information retrival
+        loadPlanetaryInformation()
+        
+    }
+    
+    /**
+     
+     Loads planetary information and refreshes visual elements on success or faliure
+     
+     */
+    
+    func loadPlanetaryInformation() {
+        
+        self.informationManager.getPlanets( {(result, planet) in
             self.planets = [planet]
             self.tableView.reloadData()
             
@@ -80,9 +111,10 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
             let imageUrl =  planet.details["image_url"]!
             self.activityIndicatorView.stopAnimating()
             
-            
+            // depending on the result display the data
             if result {
                 self.title = "Planet " + self.planets[0].details["name"]! + " info"
+                self.loadingFlag = false
             }
             else {
                 self.title = "Data unavailable"
@@ -105,7 +137,10 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         
     }
     
-        
+    /**
+     
+     when user clicks the tumbnail image perform the segue
+     */
     
     func imageTapped(img: AnyObject)
     {
@@ -172,27 +207,29 @@ class PlanetInfoTable: UIViewController , UITableViewDelegate, UITableViewDataSo
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         
-        
-        
-        
-        
-        if showResidentsButtonRow == indexPath.row {
-            
-            toRezidentList()
-        }
-        
-        // likes button if clicked - increase likes
-        if cell?.textLabel?.text == "likes" {
-            
-            if !pandoraLike {
+        if !loadingFlag {
+            if showResidentsButtonRow == indexPath.row {
                 
-                self.planets[0].likes += 1
-                cell?.detailTextLabel?.text = "\(self.planets[0].likes)"
-                
-                // once you liked it, there is no way back!
-                self.pandoraLike = true
-            
+                toRezidentList()
             }
+            
+            // likes button if clicked - increase likes
+            if cell?.textLabel?.text == "likes" {
+                
+                if !pandoraLike {
+                    
+                    self.planets[0].likes += 1
+                    cell?.detailTextLabel?.text = "\(self.planets[0].likes)"
+                    
+                    // once you liked it, there is no way back!
+                    self.pandoraLike = true
+                
+                }
+            }
+        }
+        else {
+            //reloads local data
+            self.loadPlanetaryInformation()
         }
         
         

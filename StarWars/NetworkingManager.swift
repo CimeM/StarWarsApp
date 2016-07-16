@@ -40,7 +40,7 @@ class NetworkingManager {
                 }
             case .Failure(let error):
                 print(error)
-                completion(result: false, json: nil)
+                completion(result: false, json: JSON(""))
             }
         }
     }
@@ -59,6 +59,7 @@ class NetworkingManager {
             
             // json data is String
             if let dataValue = data[value].string {
+                print(data.count)
                 planet.details[value] = dataValue
                 
             }
@@ -93,6 +94,7 @@ class NetworkingManager {
             
             // if there is a string, store it accordingly
             if let dataValue = data[value].string {
+                print(dataValue.characters.count)
                 resident.details[value] = dataValue
                 
             }
